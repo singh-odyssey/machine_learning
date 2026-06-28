@@ -8,7 +8,7 @@ from sklearn.compose import ColumnTransformer
 numeric_features = [
     "Hours_Studied",
     "Attendance",
-    "Previous_Scores", # Assuming this is "Exam Marks" or the feature you want to cap
+    "Previous_Scores", 
     "Tutoring_Sessions",
 ]
 categorical_features = ["Teacher_Quality", "Distance_from_Home", "Parental_Involvement"]
@@ -17,19 +17,19 @@ categorical_features = ["Teacher_Quality", "Distance_from_Home", "Parental_Invol
 numeric_transformer = Pipeline(
     steps=[
         ("imputer", SimpleImputer(strategy="median")),
-        ("capper_max", FunctionTransformer(func=lambda X: np.clip(X,a_min=0, a_max=99), validate=False)),
+        ("capper", FunctionTransformer(func=lambda X: np.clip(X,a_min=0, a_max=99), validate=False)),
         ("scaler", StandardScaler())
     ]
 )
 
 categorical_transformer=Pipeline(
     steps=[
-        ("imputer"),SimpleImputer(strategy="most_frequent"),
+        ("imputer",SimpleImputer(strategy="most_frequent")),
         ("onehot",OneHotEncoder(handle_unknown='ignore',sparse_output=False))
     ]) 
 
 preprocessor=ColumnTransformer(
-    transformer=[
+    transformers=[
         ('num',numeric_transformer,numeric_features),
         ('cat',categorical_transformer,categorical_features)
     ]
