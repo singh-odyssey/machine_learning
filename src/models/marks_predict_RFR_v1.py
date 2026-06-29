@@ -3,7 +3,7 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 from src.data_processing.student_analysis_pipl import preprocessor
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error , mean_absolute_error
 from sklearn.pipeline import Pipeline
 
 # saving path for files
@@ -26,12 +26,21 @@ X_train, X_test , y_train , y_test =train_test_split(X , y , test_size=0.2,rando
 model_pipeline=Pipeline(
     steps=[
         ("preprocessing", preprocessor),
-        ("regressor", RandomForestRegressor(n_estimators = 100 , n_jobs = -2 , max_depth = 10 , min_samples_leaf = 3)) 
+        ("regressor", RandomForestRegressor(n_estimators = 100 , n_jobs = -2 , max_depth = 10 , min_samples_leaf = 5)) 
     ])
 
 # time to train
 model_pipeline.fit(X_train, y_train)
 
+# predict 
+prediction=model_pipeline.predict(X_test)
+
 # test
+mae=mean_absolute_error(y_test,prediction)
+mse=mean_squared_error(y_test,prediction)
 score = model_pipeline.score(X_test, y_test)
-print(f"Model R-squared Score: {score:.4f}")
+print(f"R-squared: {score:.4f}")
+
+print(f"R-squared: {score:.4f}")
+print(f"MSE: {mse:.4f}")
+print(f"MAE: {mae:.4f}")
