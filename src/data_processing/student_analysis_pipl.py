@@ -5,6 +5,11 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder, FunctionTransfo
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
 
+
+def clip_to_range(values):
+    return np.clip(values, a_min=0, a_max=99)
+
+
 numeric_features = [
     "Hours_Studied",
     "Attendance",
@@ -17,7 +22,7 @@ categorical_features = ["Teacher_Quality", "Distance_from_Home", "Parental_Invol
 numeric_transformer = Pipeline(
     steps=[
         ("imputer", SimpleImputer(strategy="median")),
-        ("capper", FunctionTransformer(func=lambda X: np.clip(X,a_min=0, a_max=99), validate=False)),
+        ("capper", FunctionTransformer(func=clip_to_range, validate=False)),
         ("scaler", StandardScaler())
     ]
 )
