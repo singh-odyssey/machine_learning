@@ -6,12 +6,12 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error , mean_absolute_error
 from sklearn.pipeline import Pipeline
 import joblib 
-# saving path for files
-current_dir = Path(__file__).resolve().parent
-root_dir = current_dir.parent.parent
+from src.utils.paths import DATA_DIR , MODELS_DIR
 
-file_import_path = root_dir / "data" / "processed" / "StudentPerformanceFactor.csv"
-Final_model_path = root_dir / "models" / "marks_predict_RFR_v1.joblib"
+# saving path for files
+
+file_import_path = DATA_DIR / "StudentPerformanceFactor.csv"
+Final_model_path = MODELS_DIR / "marks_predict_RFR_v1.joblib"
 
 # importing file
 data = pd.read_csv(file_import_path)
