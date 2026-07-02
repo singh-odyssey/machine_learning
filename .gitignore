@@ -8,8 +8,8 @@ models/*
 !models/.gitkeep
 
 # Ignore outputs
-results/
-
+results/logs
+results/plots
 # Ignore Jupyter Notebook checkpoints
 .ipynb_checkpoints/
 
