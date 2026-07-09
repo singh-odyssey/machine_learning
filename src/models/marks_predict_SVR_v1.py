@@ -5,10 +5,10 @@ from src.data_processing.student_analysis_pipl import preprocessor
 from sklearn.svm import SVR
 from src.utils.supervised_metrics import evaluate_regression
 from src.utils.tracker import log_experiment
-from src.utils.paths import DATA_DIR, MODELS_DIR
+from src.utils.paths import DATA_DIR_PROCESS, MODELS_DIR
 import joblib
 
-data = pd.read_csv(DATA_DIR / "StudentPerformanceFactor.csv")
+data = pd.read_csv(DATA_DIR_PROCESS / "StudentPerformanceFactor.csv")
 
 # saving cols to pass as parameters
 features_to_use = [
