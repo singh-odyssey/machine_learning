@@ -72,7 +72,6 @@ matplotlib-inline==0.2.1
 mdit-py-plugins==0.6.1
 mdurl==0.1.2
 mistune==3.2.0
--e git+https://github.com/singh-odyssey/machine_learning@309c3ba3c12b29e30e1cdb8618f4e4ba34d1c3a0#egg=my_project
 narwhals==2.22.1
 nbclient==0.10.4
 nbconvert==7.17.0
