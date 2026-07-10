@@ -5,6 +5,7 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
 # 2. These are  sub-divisions (Relative to the root)
 DATA_DIR_PROCESS = ROOT_DIR / "data" / "processed"
+DATA_DIR_PROCESS = ROOT_DIR / "data" / "raw"
 MODELS_DIR = ROOT_DIR / "models"
 RESULTS_DIR = ROOT_DIR / "results"
 SRC_DIR = ROOT_DIR / "src"
