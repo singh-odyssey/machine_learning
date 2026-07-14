@@ -57,7 +57,7 @@ grid_search = GridSearchCV(
         "mse": "neg_mean_squared_error",
         "r2": "r2",
     },
-    n_jobs=-1
+    n_jobs=-1,
     refit="r2",
     verbose=1,
 )
