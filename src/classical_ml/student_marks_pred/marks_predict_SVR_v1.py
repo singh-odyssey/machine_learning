@@ -5,7 +5,7 @@ from src.data_processing.student_analysis_pipl import preprocessor
 from sklearn.svm import SVR
 from src.utils.supervised_metrics import evaluate_regression
 from src.utils.tracker import log_experiment
-from src.utils.paths import DATA_DIR_PROCESS, MODELS_DIR
+from src.utils.paths import DATA_DIR_PROCESS, CML_MODELS_DIR
 import joblib
 
 data = pd.read_csv(DATA_DIR_PROCESS / "StudentPerformanceFactor.csv")
@@ -45,7 +45,7 @@ prediction = model_pipeline.predict(X_test)
 evaluation = evaluate_regression(y_test, prediction)
 
 # saving model
-joblib.dump(model_pipeline, MODELS_DIR / "marks_predict_SVR_v1.joblib")
+joblib.dump(model_pipeline, CML_MODELS_DIR / "marks_predict_SVR_v1.joblib")
 print("model saved")
 
 # saving the metrics

@@ -4,7 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from kneed import KneeLocator
 from sklearn.metrics import silhouette_score
-from src.utils.paths import DATA_DIR_PROCESS, MODELS_DIR
+from src.utils.paths import DATA_DIR_PROCESS, CML_MODELS_DIR
 from src.utils.tracker import log_experiment
 import joblib
 
@@ -43,7 +43,7 @@ silhouette_avg = silhouette_score(X_scaled, clusters)
 print(f"Silhouette Score of Model is -> {silhouette_avg}")
 
 # saving model
-joblib.dump(kmeans, MODELS_DIR / "Mall_Customer_KMEANS_v1.joblib")
+joblib.dump(kmeans, CML_MODELS_DIR / "Mall_Customer_KMEANS_v1.joblib")
 
 # saving metrics
 metrics = {"Silhouette_Score": silhouette_avg, "WCSS": kmeans.inertia_}

@@ -1,4 +1,3 @@
-import pandas as pd
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -7,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 import joblib
-from src.utils.paths import MODELS_DIR
+from src.utils.paths import CML_MODELS_DIR
 
 iris = load_iris(as_frame=True)
 
@@ -52,6 +51,6 @@ print("\nAccuracy:", accuracy_score(y_test, svm_predict))
 print("\nConfusion Matrix:\n", confusion_matrix(y_test, svm_predict))
 print("\nClassification Report:\n", classification_report(y_test, svm_predict))
 
-joblib.dump(knn_model,MODELS_DIR/"iris_knn_v1.joblib")
-joblib.dump(log_reg,MODELS_DIR/"iris_log_reg_v1.joblib")
-joblib.dump(svm_model,MODELS_DIR/"iris_svm_v1.joblib")
+joblib.dump(knn_model, CML_MODELS_DIR / "iris_knn_v1.joblib")
+joblib.dump(log_reg, CML_MODELS_DIR / "iris_log_reg_v1.joblib")
+joblib.dump(svm_model, CML_MODELS_DIR / "iris_svm_v1.joblib")

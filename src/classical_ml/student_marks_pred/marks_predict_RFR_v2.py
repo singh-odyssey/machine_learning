@@ -3,7 +3,7 @@ from sklearn.model_selection import train_test_split, GridSearchCV , KFold
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
 from src.data_processing.student_analysis_pipl import preprocessor
-from src.utils.paths import DATA_DIR_PROCESS ,MODELS_DIR
+from src.utils.paths import DATA_DIR_PROCESS, CML_MODELS_DIR
 from src.utils.supervised_metrics import evaluate_regression
 from src.utils.tracker import log_experiment
 import joblib
@@ -74,4 +74,4 @@ metrics = evaluate_regression(y_test, y_pred)
 log_experiment(best_model,metrics,"marks_predict_RFR_hypertuning")
 
 # saving model
-joblib.dump(best_model,MODELS_DIR/"marks_predict_RFR_v2(hypertuning).joblib")
+joblib.dump(best_model, CML_MODELS_DIR / "marks_predict_RFR_v2(hypertuning).joblib")

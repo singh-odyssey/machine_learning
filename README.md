@@ -1,6 +1,6 @@
 # Machine Learning Models Repository
 
-A machine learning project repository designed for learning, practicing, and building different types of machine learning models. 
+A machine learning project repository designed for learning, practicing, and building classical machine learning and deep learning projects.
 
 ---
 
@@ -8,32 +8,41 @@ A machine learning project repository designed for learning, practicing, and bui
 
 ```
 machine_learning/
-├── 📂 data/                      # 🔄 DATA MANAGEMENT
+├── 📂 config/
+│   └── training_configs/         # YAML/JSON configs for experiments
+│
+├── 📂 data/                      # Segregated by state
 │   ├── raw/                      # Original data (don't modify)
 │   └── processed/                # Cleaned, ready-to-use data
 │
-├── 📂 src/                       # 💻 PROJECT CODE
-│   ├── data_processing/          # Scripts to clean & prepare data
-│   ├── models/                   # ML model implementations
-│   └── utils/                    # Helper functions & tools
+├── 📂 models/                    # Saved artifacts by family
+│   ├── classical_ml/
+│   └── deep_learning/
+│       ├── vision/
+│       └── text/
 │
-├── 📂 notebooks/                 # 📓 EXPERIMENTS & EXPLORATION
-│   └── first_mlm.ipynb           # Example notebook
+├── 📂 notebooks/
+│   ├── classical_ml/
+│   └── deep_learning/
+│       ├── vision/
+│       └── text/
 │
-├── 📂 models/                    # 🤖 TRAINED MODELS
-│   └── (saved model files)
+├── 📂 results/
+│   ├── logs/
+│   ├── metrics/
+│   └── plots/
 │
-├── 📂 results/                   # 📊 EXPERIMENT OUTPUTS
-│   ├── plots/                    # Charts & visualizations
-│   ├── metrics/                  # Performance scores
-│   └── logs/                     # Training logs
+├── 📂 src/
+│   ├── classical_ml/
+│   ├── deep_learning/
+│   │   ├── vision/
+│   │   └── text/
+│   └── utils/
 │
 ├── 📂 tests/                     # ✅ TEST CODE
 │
-├── 📂 config/                    # ⚙️ CONFIGURATION
-│
+├── 📄 pyproject.toml             # Makes the src tree installable
 ├── 📄 requirements.txt           # 📦 Python dependencies
-├── 📄 setup.py                   # 🔧 Package configuration
 ├── 📄 LICENSE                    # 📋 License
 └── 📄 README.md                  # 📖 This file
 ```
@@ -48,16 +57,19 @@ This folder holds all the data for your project:
 - **processed/**: Store your cleaned and prepared data here. This is what your models will use.
 
 ### **src/** - Your Project Code
-All your Python code goes here, organized into three simple folders:
-- **data_processing/**: Code to read raw data, clean it, and prepare it for machine learning
-- **models/**: Your machine learning model code (algorithms, training, predictions)
-- **utils/**: Helper functions that you use multiple times in your project
+All your Python code goes here, organized by workflow:
+- **classical_ml/**: Tabular ML pipelines, preprocessing, training, and evaluation
+- **deep_learning/**: Shared neural utilities plus vision/text specific modules
+- **utils/**: Helper functions and shared path/tracking utilities
 
 ### **notebooks/** - Experimentation Area
-Jupyter notebooks for exploring your data and testing new ideas. You can write code, see results immediately, and add notes. This project includes `first_mlm.ipynb` as an example.
+Jupyter notebooks for exploring your data and testing new ideas. You can write code, see results immediately, and add notes. Existing classical ML notebooks now live under `notebooks/classical_ml/`.
 
 ### **models/** - Your Trained Models
-After you train a machine learning model, save it here. You can then load and use it later without training again.
+Store serialized outputs by family:
+- **classical_ml/**: scikit-learn and joblib files
+- **deep_learning/vision/**: CNN, ViT, and diffusion checkpoints
+- **deep_learning/text/**: transformer, LLM, and RAG artifacts
 
 ### **results/** - Your Experiment Results
 All outputs from your machine learning experiments go here:
@@ -83,8 +95,8 @@ The main packages used are:
 - **scikit-learn**: Pre-built machine learning models
 - **matplotlib & seaborn**: For creating charts and visualizations
 
-### **setup.py** - Package Setup
-A special file that makes your project installable and shareable with others.
+### **pyproject.toml** - Package Setup
+A modern packaging file that makes your `src` tree installable.
 
 ---
 
@@ -115,16 +127,16 @@ pip install -r requirements.txt
 
 1. **Get your data** → Put raw files in `data/raw/`
 
-2. **Clean your data** → Write Python scripts in `src/data_processing/` to clean the data and save results to `data/processed/`
+2. **Clean your data** → Write Python scripts in `src/classical_ml/` or `src/utils/` to clean the data and save results to `data/processed/`
 
-3. **Build models** → Write model code in `src/models/` and create helper functions in `src/utils/`
+3. **Build models** → Write classical ML code in `src/classical_ml/` and deep learning code in `src/deep_learning/`
 
 4. **Test your code** → Run `pytest tests/` to make sure everything works
 
 5. **Train and test** → Use Jupyter notebooks in `notebooks/` to experiment with your models
 
 6. **Save everything** → 
-   - Save trained models to `models/`
+   - Save trained models to `models/classical_ml/` or `models/deep_learning/`
    - Save charts to `results/plots/`
    - Save performance numbers to `results/metrics/`
    - Save training logs to `results/logs/`
@@ -135,4 +147,4 @@ pip install -r requirements.txt
 
 - **Python Version**: Requires Python 3.7 or higher
 - **License**: MIT License
-- **Purpose**: A learning and practice repository for machine learning projects following  Industry Standards .
+- **Purpose**: A learning and practice repository for machine learning projects following industry standards.

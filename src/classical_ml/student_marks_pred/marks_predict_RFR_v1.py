@@ -6,12 +6,12 @@ from src.utils.supervised_metrics import evaluate_regression
 from src.utils.tracker import log_experiment
 from sklearn.pipeline import Pipeline
 import joblib
-from src.utils.paths import DATA_DIR_PROCESS, MODELS_DIR, RESULTS_DIR
+from src.utils.paths import DATA_DIR_PROCESS, CML_MODELS_DIR, RESULTS_DIR
 
 # saving path for files
 
 file_import_path = DATA_DIR_PROCESS / "StudentPerformanceFactor.csv"
-Final_model_path = MODELS_DIR / "marks_predict_RFR_v1.joblib"
+Final_model_path = CML_MODELS_DIR / "marks_predict_RFR_v1.joblib"
 
 # importing file
 data = pd.read_csv(file_import_path)

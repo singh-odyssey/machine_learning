@@ -1,22 +1,27 @@
-# Ignore all files inside these data folders
+# Ignore generated data, checkpoints, and model artifacts.
 data/raw/*
+data/interim/*
 data/processed/*
-models/*
-# Do not ignore the .gitkeep files inside them
 !data/raw/.gitkeep
+!data/interim/.gitkeep
 !data/processed/.gitkeep
-!models/.gitkeep
 
-# Ignore outputs
-results/logs
-results/plots
-# Ignore Jupyter Notebook checkpoints
+models/classical_ml/*
+models/deep_learning/*
+!models/deep_learning/.gitkeep
+
+results/logs/*
+results/plots/*
+!results/logs/.gitkeep
+!results/plots/.gitkeep
+
+# Ignore notebook checkpoints.
 .ipynb_checkpoints/
 
-# Ignore Python cache and environments
+# Ignore Python cache and local environments.
 __pycache__/
 *.pyc
 venv/
 .env
-config/
+config/.env
 
