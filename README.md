@@ -87,4 +87,3 @@ pytest tests/
 
 ---
 
-If you'd like, I can also add a short CONTRIBUTING section, update `requirements.txt` with exact pinned versions, or generate a small example script that loads `data/processed/Mall_Customers_Data.csv` and trains the KMeans model located in `models/classical_ml/`.
