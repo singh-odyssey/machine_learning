@@ -1,3 +1,4 @@
 Timestamp,Algorithm,Param_bootstrap,Param_ccp_alpha,Param_criterion,Param_max_depth,Param_max_features,Param_max_leaf_nodes,Param_max_samples,Param_min_impurity_decrease,Param_min_samples_leaf,Param_min_samples_split,Param_min_weight_fraction_leaf,Param_monotonic_cst,Param_n_estimators,Param_n_jobs,Param_oob_score,Param_random_state,Param_verbose,Param_warm_start,R-squared,MSE,MAE
 2026-07-02 10:06:43,RandomForestRegressor,True,0.0,squared_error,10,1.0,,,0.0,5,2,0.0,,100,-2,False,,0,False,0.639,5.1023,1.2605
 2026-07-02 10:24:36,RandomForestRegressor,True,0.0,squared_error,10,1.0,,,0.0,5,2,0.0,,100,-2,False,,0,False,0.6394,5.097,1.2534
+2026-07-14 09:57:11,RandomForestRegressor,True,0.0,squared_error,10,1.0,,,0.0,5,2,0.0,,100,-2,False,,0,False,0.6427,5.0504,1.2583
