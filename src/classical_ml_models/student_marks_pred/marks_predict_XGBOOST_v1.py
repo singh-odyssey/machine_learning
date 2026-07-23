@@ -2,7 +2,7 @@ import pandas as pd
 import xgboost as xgb
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.pipeline import Pipeline
-from src.data_processing.student_analysis_pipl import preprocessor
+from data_processing.classical_ml.student_analysis_pipl import preprocessor
 from src.utils.paths import DATA_DIR_PROCESS
 from src.utils.supervised_metrics import evaluate_regression
 from src.utils.tracker import log_experiment

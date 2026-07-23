@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split, GridSearchCV , KFold
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor
-from src.data_processing.student_analysis_pipl import preprocessor
+from data_processing.classical_ml.student_analysis_pipl import preprocessor
 from src.utils.paths import DATA_DIR_PROCESS, CML_MODELS_DIR
 from src.utils.supervised_metrics import evaluate_regression
 from src.utils.tracker import log_experiment

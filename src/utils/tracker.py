@@ -1,5 +1,3 @@
-# algo to save performance of model with different parameters on each run 
-
 import pandas as pd
 import os
 from datetime import datetime
@@ -8,7 +6,7 @@ from src.utils.paths import METRICS_DIR
 
 def log_experiment(model, metrics, experiment_name="Experiment_Log"):
     """
-    Universally saves model metrics and parameters.
+    Universally saves model metrics and parameters for both Scikit-Learn and Keras.
     The CSV file will be named exactly what you pass as 'experiment_name'.
     """
     if isinstance(model, Pipeline):
@@ -25,10 +23,23 @@ def log_experiment(model, metrics, experiment_name="Experiment_Log"):
         "Algorithm": [algo_name],
     }
     
-    # 2. Add the parameters
-    params_dict = estimator.get_params()
+    # 2. Add the parameters (Safely handle Scikit-Learn vs Keras)
+    if hasattr(estimator, 'get_params'):
+        # Scikit-Learn behavior
+        params_dict = estimator.get_params()
+    elif hasattr(estimator, 'get_config'):
+        # Keras behavior - Extract basic high-level architecture
+        params_dict = {
+            "keras_layers": len(estimator.layers),
+            "keras_trainable_params": estimator.count_params()
+        }
+    else:
+        # Fallback for unknown model types
+        params_dict = {"Parameters": "Unknown"}
+
     for param_name, param_value in params_dict.items():
-        row_data[f"Param_{param_name}"] = [param_value]
+        # Convert complex objects (like functions) to strings to prevent CSV errors
+        row_data[f"Param_{param_name}"] = [str(param_value)]
     
     # 3. Add the metrics to the end of the row
     for metric_name, value in metrics.items():
@@ -40,9 +51,11 @@ def log_experiment(model, metrics, experiment_name="Experiment_Log"):
 
     # Save/Append data
     if os.path.exists(csv_path):
-        df.to_csv(csv_path, mode='a', header=False, index=False)
+        # Concatenate allows pandas to handle new columns dynamically if parameters change
+        existing_df = pd.read_csv(csv_path)
+        combined_df = pd.concat([existing_df, df], ignore_index=True)
+        combined_df.to_csv(csv_path, index=False)
     else:
         df.to_csv(csv_path, mode='w', header=True, index=False)
         
     print(f"\n--- Metrics successfully logged to {csv_path} ---")
-    

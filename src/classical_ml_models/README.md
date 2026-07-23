@@ -10,3 +10,5 @@ Use this area for tabular preprocessing, training scripts, clustering, regressio
 
 Saved artifacts from these scripts should go to `models/classical_ml/`.
 ## Best Practices
+Models should be saved with a clear and consistent naming convention: `[problem_domain]_[model_algorithm]_[version].joblib`.
+For example: `iris_knn_v1.joblib` or `Mall_Customer_KMEANS_v1.joblib`.

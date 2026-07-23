@@ -79,11 +79,5 @@ pytest tests/
 
 ---
 
-## 📝 Notes
 
-- Python 3.8+ is recommended.
-- Use `src/utils/paths.py` to build reproducible file paths across the project.
-- If you add or move files, update this README to keep the structure accurate.
-
----
 
