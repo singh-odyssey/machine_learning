@@ -1,6 +1,6 @@
 import keras
 from keras.models import Sequential
-from keras.layers import Dense, Dropout , InputLayer
+from keras.layers import Dense, Dropout, InputLayer
 from keras.callbacks import EarlyStopping
 import keras_tuner as kt
 from sklearn.datasets import fetch_california_housing
@@ -47,28 +47,44 @@ def build_model(hp):
             )
             model.add(Dropout(rate=drop_rate))
 
-    # THE OUTPUT LAYER 
-    model.add(Dense(1 ,activation='linear'))
+    # THE OUTPUT LAYER
+    model.add(Dense(1, activation="linear"))
 
     # COMPILE
-    hp_learning_rate = hp.Choice("learning_rate", values=[1e-2, 1e-3, 1e-4])
     
+    hp_learning_rate = hp.Choice("learning_rate", values=[1e-2, 1e-3, 1e-4])
+    hp_optimizer = hp.Choice("optimizer", values=["adam", "sgd", "rmsprop", "nadam"])
+
+    
+    if hp_optimizer == "adam":
+        selected_optimizer = keras.optimizers.Adam(learning_rate=hp_learning_rate)
+    elif hp_optimizer == "sgd":
+        selected_optimizer = keras.optimizers.SGD(
+            learning_rate=hp_learning_rate, momentum=0.9
+        )
+    elif hp_optimizer == "rmsprop":
+        selected_optimizer = keras.optimizers.RMSprop(learning_rate=hp_learning_rate)
+    elif hp_optimizer == "nadam":
+        selected_optimizer = keras.optimizers.Nadam(learning_rate=hp_learning_rate)
+
+    # 3. Compile the model
     model.compile(
-        optimizer=keras.optimizers.Adam(learning_rate=hp_learning_rate),
+        optimizer=selected_optimizer,
         loss="mse",
         metrics=["mae"],
     )
 
     return model
 
+
 # tuner
 tuner = kt.Hyperband(
-    build_model,               
-    objective="val_loss",      
-    max_epochs=50,             
-    factor=3,                  
-    directory=LOGS_DIR,    
-    project_name="cali_housing" 
+    build_model,
+    objective="val_loss",
+    max_epochs=50,
+    factor=3,
+    directory=LOGS_DIR,
+    project_name="cali_housing",
 )
 
 # earlystopping
@@ -84,11 +100,11 @@ early_stopping = EarlyStopping(
 # Execute the search
 print("Starting hyperparameter search...")
 tuner.search(
-    X_train_scaled, 
-    y_train, 
-    epochs=1000, 
-    validation_split=0.2,     
-    callbacks=[early_stopping]
+    X_train_scaled,
+    y_train,
+    epochs=1000,
+    validation_split=0.2,
+    callbacks=[early_stopping],
 )
 
 # best hyperparameters found during the search
@@ -103,11 +119,11 @@ final_model = tuner.hypermodel.build(best_hps)
 
 # Train the final model
 history = final_model.fit(
-    X_train_scaled, 
-    y_train, 
-    epochs=1000, 
-    validation_split=0.2, 
-    callbacks=[early_stopping]
+    X_train_scaled,
+    y_train,
+    epochs=1000,
+    validation_split=0.2,
+    callbacks=[early_stopping],
 )
 
 prediction = final_model.predict(X_test_scaled)
