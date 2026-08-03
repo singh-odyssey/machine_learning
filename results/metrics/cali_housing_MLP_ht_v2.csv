@@ -1,2 +1,4 @@
 Timestamp,Algorithm,Param_keras_layers,Param_keras_trainable_params,R-squared,MSE,MAE
 2026-08-01 17:30:58,Sequential,4,71377,0.7867,0.2795,0.3623
+2026-08-01 17:36:45,Sequential,4,71377,0.7929,0.2714,0.3531
+2026-08-01 17:38:01,Sequential,4,71377,0.7967,0.2665,0.3486
